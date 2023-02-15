@@ -396,3 +396,6 @@ Temporary Items
 # Local
 .env
 dist
+
+/secrets/*
+node_modules/*
