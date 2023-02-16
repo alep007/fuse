@@ -3,6 +3,7 @@ import * as firebase from "firebase-admin";
 import { cert } from "firebase-admin/app";
 import * as serviceAccount from "../../secrets/firebaseServiceAccount.json";
 import { Firestore } from "@google-cloud/firestore";
+import * as fireorm from "fireorm";
 
 const firebaseParams = {
   type: serviceAccount.type,
@@ -49,5 +50,9 @@ function firebaseConnection(): Firestore {
     databaseURL: "https://firefuse-project.firebaseio.com",
   });
 
-  return firebase.firestore(firebaseApp);
+  const firestore = firebase.firestore(firebaseApp);
+  fireorm.initialize(firestore);
+
+  console.log("firestore initialized!");
+  return firestore;
 }
