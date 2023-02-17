@@ -58,8 +58,8 @@ export default BudgetNewButton;
 const StyledFloatButton = styled(Fab)({
   margin: 0,
   top: "auto",
-  right: 20,
-  bottom: 20,
+  right: 32,
+  bottom: 16,
   left: "auto",
   position: "fixed",
 });

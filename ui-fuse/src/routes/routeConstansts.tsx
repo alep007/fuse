@@ -1,7 +1,6 @@
 const routeConstants = {
   DashBoard: "/dashboard",
   PleaseWait: "/pleaseWait",
-  //   Login: "/systemUser/runs/:id",
   Login: "/login",
   Logout: "/logout",
   NewBudget: "/budgets/new",

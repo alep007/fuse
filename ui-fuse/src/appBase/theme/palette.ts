@@ -82,6 +82,13 @@ const palette = {
   success: SUCCESS,
   divider: alpha(GREY[500], 0.24),
   grey: GREY,
+  heading: GREY[900],
+  paper: WHITE.main,
+  darkTextPrimary: GREY[700],
+  darkTextSecondary: GREY[500],
+  textDark: GREY[900],
+  menuSelected: PRIMARY.dark,
+  menuSelectedBack: PRIMARY.light,
   common: {
     grey: "#EFEFEF",
     white: "#FFFFFF",
@@ -93,9 +100,11 @@ const palette = {
     disabled: GREY[10],
   },
   background: {
-    paper: "#fff",
-    default: GREY[100],
+    default: "#eef2f6",
+    paper: GREY[100],
+    white: WHITE.main,
   },
+  backgroundDefault: GREY[100],
 };
 
 export default palette;

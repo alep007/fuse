@@ -6,17 +6,27 @@ import ComponentsOverrides from "./overrides";
 import customShadows from "./customShadows";
 import shadows from "./shadows";
 import GlobalStyles from "./globalStyles";
+import themeTypography from "./typography";
 
 const ThemeProvider = ({ children }: any) => {
   const themeOptions = useMemo(
     () => ({
       palette,
       shape: { borderRadius: 6 },
-      typography: {
-        fontFamily: "Poppins",
-      },
+      typography: themeTypography(palette),
       shadows: shadows(),
+
       customShadows: customShadows(),
+      direction: "ltr",
+      mixins: {
+        toolbar: {
+          minHeight: "48px",
+          padding: "16px",
+          "@media (min-width: 600px)": {
+            minHeight: "48px",
+          },
+        },
+      },
     }),
     [],
   );
@@ -27,8 +37,9 @@ const ThemeProvider = ({ children }: any) => {
 
   return (
     <StyledEngineProvider injectFirst>
+      <CssBaseline />
+
       <MUIThemeProvider theme={theme}>
-        <CssBaseline />
         <GlobalStyles />
         {children}
       </MUIThemeProvider>
