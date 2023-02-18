@@ -11,14 +11,23 @@ import { BrowserView, MobileView } from "react-device-detect";
 // project imports
 import MenuList from "./menu";
 import LogoSection from "../main/logo";
+import { useRecoilState } from "recoil";
+import menuAtom from "../../../../recoil/folder/atom";
 
-const drawerWidth = 240;
+const drawerWidth = 280;
 
 // ==============================|| SIDEBAR DRAWER ||============================== //
 
-const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
+const Sidebar = ({ drawerOpen, window }) => {
   const theme = useTheme();
   const matchUpMd = useMediaQuery(theme.breakpoints.up("md"));
+
+  const [menu, setMenuDrawer] = useRecoilState(menuAtom);
+
+  const drawerToggle = () => {
+    const newMenu = { ...menu, isDrawerOpen: !menu.isDrawerOpen };
+    setMenuDrawer(newMenu);
+  };
 
   const drawer = (
     <>
@@ -59,7 +68,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
         container={container}
         variant={matchUpMd ? "persistent" : "temporary"}
         anchor="left"
-        open={drawerOpen}
+        open={menu.isDrawerOpen}
         onClose={drawerToggle}
         sx={{
           "& .MuiDrawer-paper": {
