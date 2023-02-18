@@ -1,16 +1,10 @@
-import React, { useState } from "react";
-import { useSearchBox, UseSearchBoxProps } from "react-instantsearch-hooks-web";
 import { styled, alpha } from "@mui/material/styles";
-import { Toolbar, Tooltip, IconButton, Typography, OutlinedInput, InputAdornment, Button, Icon } from "@mui/material";
+import { Toolbar, IconButton, OutlinedInput, InputAdornment, Button } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
-import { SECONDARY, WHITE } from "../../../appBase/theme/palette";
+import ActivityFilterButton from "./ActivityFilterButton";
 
-const CustomSearchBox = (props: UseSearchBoxProps) => {
-  const { query, refine } = useSearchBox(props);
-
-  //   const [text];
-
+const ActivitySearchBox = () => {
   return (
     <StyledRoot>
       <StyledSearch
@@ -34,14 +28,12 @@ const CustomSearchBox = (props: UseSearchBoxProps) => {
           </InputAdornment>
         }
       />
-      <Button variant="contained" color="primary" size="large">
-        Filtros
-      </Button>
+      <ActivityFilterButton />
     </StyledRoot>
   );
 };
 
-export default CustomSearchBox;
+export default ActivitySearchBox;
 
 const StyledRoot = styled(Toolbar)(({ theme }) => ({
   height: 96,
