@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Outlet } from "react-router-dom";
 // @mui
 import { styled, useTheme } from "@mui/material/styles";
@@ -6,10 +5,12 @@ import { styled, useTheme } from "@mui/material/styles";
 import { AppBar, Box, Toolbar, useMediaQuery } from "@mui/material";
 import Header from "./header";
 import Sidebar from "../sidebar";
+import { useRecoilValue } from "recoil";
+import menuAtom from "../../../../recoil/folder/atom";
 
 // ----------------------------------------------------------------------
 
-const DRAWER_WIDTH = 260;
+const DRAWER_WIDTH = 280;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(({ theme, open }: any) => ({
   //@ts-ignore
@@ -59,7 +60,9 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(({
 
 export default function MainLayout() {
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
+  const menu = useRecoilValue(menuAtom);
+  const open = menu.isDrawerOpen;
+
   const matchDownMd = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
@@ -76,15 +79,12 @@ export default function MainLayout() {
         }}
       >
         <Toolbar>
-          {/* <Header handleLeftDrawerToggle={handleLeftDrawerToggle} /> */}
           <Header />
         </Toolbar>
       </AppBar>
 
       {/* drawer */}
-      <Sidebar drawerOpen />
-      {/* {!matchDownMd ? leftDrawerOpened : !leftDrawerOpened} drawerToggle={handleLeftDrawerToggle} */}
-      <Sidebar />
+      <Sidebar drawerOpen={!matchDownMd ? open : !open} />
 
       {/* main content */}
       {/* @ts-ignore */}

@@ -5,16 +5,20 @@ import { Link } from "react-router-dom";
 // material-ui
 import { useTheme } from "@mui/material/styles";
 import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography, useMediaQuery } from "@mui/material";
-
-// assets
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import { useRecoilState } from "recoil";
+import menuAtom from "../../../../../../recoil/folder/atom";
 
 // ==============================|| SIDEBAR MENU LIST ITEMS ||============================== //
 
 const NavItem = ({ item, level }) => {
   const theme = useTheme();
 
-  const matchesSM = useMediaQuery(theme.breakpoints.down("lg"));
+  const [menu, setMenuItem] = useRecoilState(menuAtom);
+
+  const itemHandler = (id) => {
+    const newMenu = { ...menu, itemIsOpen: [id] };
+    setMenuItem(newMenu);
+  };
 
   let itemTarget = "_self";
   if (item.target) {
@@ -34,6 +38,10 @@ const NavItem = ({ item, level }) => {
       .toString()
       .split("/")
       .findIndex((id) => id === item.id);
+    if (currentIndex > -1) {
+      const newMenu = { ...menu, itemIsOpen: [item.id] };
+      setMenuItem(newMenu);
+    }
   }, []);
 
   return (
@@ -48,8 +56,8 @@ const NavItem = ({ item, level }) => {
         py: level > 1 ? 1 : 1.25,
         pl: `${level * 24}px`,
       }}
-      //   selected={customization.isOpen.findIndex((id) => id === item.id) > -1}
-      //   onClick={() => itemHandler(item.id)}
+      onClick={() => itemHandler(item.id)}
+      selected={menu.itemIsOpen.findIndex((id) => id === item.id) > -1}
     >
       <ListItemIcon sx={{ my: "auto", minWidth: !item?.icon ? 18 : 36 }}>{item.icon}</ListItemIcon>
       <ListItemText
