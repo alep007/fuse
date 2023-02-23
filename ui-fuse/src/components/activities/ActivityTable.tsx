@@ -17,11 +17,12 @@ import React from "react";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import NoteAddIcon from "@mui/icons-material/NoteAdd";
-import { SECONDARY } from "../../appBase/theme/palette";
+
 import { fCurrency } from "../../utils/formatNumber";
 import { useRecoilValue } from "recoil";
 import { compositionsQueryList } from "../../recoil/composition";
+import ActivityAddButton from "./ActivityAddButton";
+import Loader from "../common/Loader";
 
 const ActivityTable = () => {
   const { data } = useRecoilValue(compositionsQueryList);
@@ -29,7 +30,7 @@ const ActivityTable = () => {
   if (data.length === 0) return null;
 
   return (
-    <React.Suspense fallback={<div>Loading...</div>}>
+    <React.Suspense fallback={<Loader />}>
       <TableContainer component={Paper}>
         <Table aria-label="collapsible table">
           <TableHead>
@@ -72,9 +73,7 @@ const Row = (props: { row: any }) => {
         <TableCell align="right">{row.price}</TableCell>
         <TableCell align="right">{row.unit_measure}</TableCell>
         <TableCell align="center">
-          <IconButton>
-            <NoteAddIcon sx={{ color: SECONDARY.main }} />
-          </IconButton>
+          <ActivityAddButton item={row} />
         </TableCell>
       </TableRow>
       <TableRow>
