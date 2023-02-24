@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 // material-ui
 import { useTheme } from "@mui/material/styles";
-import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography, useMediaQuery } from "@mui/material";
+import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import { useRecoilState } from "recoil";
 import menuAtom from "../../../../../../recoil/folder/atom";
 
@@ -42,6 +42,7 @@ const NavItem = ({ item, level }) => {
       const newMenu = { ...menu, itemIsOpen: [item.id] };
       setMenuItem(newMenu);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

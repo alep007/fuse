@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 // material-ui
-import { ButtonBase, Grid, Stack, Typography, useTheme } from "@mui/material";
+import { ButtonBase, Stack, Typography, useTheme } from "@mui/material";
 
 // project imports
 import Logo from "../../../Logo";

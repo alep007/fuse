@@ -1,16 +1,20 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Fab, Stack } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Fab, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
-import { SECONDARY, WHITE } from "../../appBase/theme/palette";
+import { PRIMARY, SECONDARY, WHITE } from "../../appBase/theme/palette";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { FormContainer, TextFieldElement } from "react-hook-form-mui";
 import { budgetSelector } from "../../recoil/budget";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { BudgetAtomProps } from "../../recoil/budget/atom";
 
 type FormProps = Partial<BudgetAtomProps>;
 
+/**
+ * FAB button that handles first step for new budget creation
+ * @returns
+ */
 const BudgetNewButton = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -18,10 +22,11 @@ const BudgetNewButton = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const setBudgetHeader = useSetRecoilState(budgetSelector);
+  const [budget, setBudgetHeader] = useRecoilState(budgetSelector);
 
   const onSubmit = (data: FormProps) => {
-    setBudgetHeader(data);
+    data.date = new Date().toDateString();
+    setBudgetHeader({ ...budget, ...data });
     navigate("/budgets/new");
   };
 
@@ -32,7 +37,11 @@ const BudgetNewButton = () => {
       </StyledFloatButton>
       <Dialog open={open} sx={{ "& .MuiDialog-paper": { width: "80%", maxHeight: 435 } }} maxWidth="xs">
         <FormContainer onSuccess={onSubmit}>
-          <DialogTitle>Nuevo Presupuesto</DialogTitle>
+          <DialogTitle sx={{ backgroundColor: PRIMARY.main }}>
+            <Typography variant="h4" color={WHITE.main}>
+              Nuevo Presupuesto
+            </Typography>
+          </DialogTitle>
           <DialogContent>
             <Stack spacing={2} padding={2}>
               <TextFieldElement name="name" label="Nombre" required type="text" />
@@ -43,7 +52,7 @@ const BudgetNewButton = () => {
             <Button variant="outlined" onClick={handleClose}>
               Cancelar
             </Button>
-            <Button variant="contained" sx={{ backgroundColor: SECONDARY.dark, color: WHITE.main }} type="submit">
+            <Button variant="contained" sx={{ backgroundColor: SECONDARY.main, color: WHITE.main }} type="submit">
               Crear
             </Button>
           </DialogActions>

@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import { Button, Fab, Paper, Stack } from "@mui/material";
-import { Container } from "@mui/system";
+import { Button, Fab, Stack } from "@mui/material";
 import BudgetDetailTable from "./BudgetDetailTable";
 import BudgetSummaryPaper from "./BudgetSummaryPaper";
 import SaveIcon from "@mui/icons-material/Save";
@@ -17,17 +16,11 @@ const BudgetNewPage = () => {
   };
 
   return (
-    <Container>
+    <>
       <BudgetSummaryPaper />
       <br />
 
-      <Stack
-        sx={{ height: "100%" }}
-        spacing={{ xs: 1, sm: 1, md: 1 }}
-        direction="row"
-        justifyContent="flex-start"
-        alignItems="flex-start"
-      >
+      <Stack spacing={{ xs: 1, sm: 1, md: 1 }} direction="row" justifyContent="flex-start" alignItems="flex-start">
         <Button variant="contained" color="info" size="large">
           Nuevo grupo
         </Button>
@@ -40,7 +33,7 @@ const BudgetNewPage = () => {
       <StyledFloatButton color="secondary">
         <SaveIcon sx={{ color: WHITE.main }} />
       </StyledFloatButton>
-    </Container>
+    </>
   );
 };
 
@@ -49,7 +42,7 @@ export default BudgetNewPage;
 const StyledFloatButton = styled(Fab)({
   margin: 0,
   top: "auto",
-  right: 20,
+  right: 32,
   bottom: 20,
   left: "auto",
   position: "fixed",

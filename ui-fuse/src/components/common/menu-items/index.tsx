@@ -1,8 +1,5 @@
 import HomeIcon from "@mui/icons-material/Home";
-import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import StoreIcon from "@mui/icons-material/Store";
-import LogoutIcon from "@mui/icons-material/Logout";
-import { PRIMARY } from "../../../appBase/theme/palette";
 
 const menuItems = {
   items: [

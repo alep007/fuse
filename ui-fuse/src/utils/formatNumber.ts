@@ -7,7 +7,7 @@ export function fNumber(number: Number) {
 }
 
 export function fCurrency(number: Number) {
-  const format = number ? numeral(number).format("$0,0.00") : "";
+  const format = number ? numeral(number).format("$0,0.00") : "0";
 
   return result(format, ".00");
 }

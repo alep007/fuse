@@ -17,18 +17,44 @@ import { FormContainer, TextFieldElement } from "react-hook-form-mui";
 import { useState } from "react";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import { fCurrency } from "../../utils/formatNumber";
+import { ActivityToAdd, Composition } from "../../types/Composition.type";
+import { useRecoilState } from "recoil";
+import budgetAtom from "../../recoil/budget/atom";
+import { useNavigate } from "react-router-dom";
 
-const ActivityAddButton = ({ item }: any) => {
+/**
+ * FAB button, displays a dialog to add a new activity to budget list
+ * @param param0
+ * @returns
+ */
+const ActivityAddButton = ({ item }: { item: Composition }) => {
+  const navigate = useNavigate();
+  const [budget, addActivity] = useRecoilState(budgetAtom);
+
   const [open, setOpen] = useState(false);
   const [subTotal, setSubTotal] = useState(0);
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setSubTotal(0);
+  };
 
-  const onSubmit = (data: any) => {};
+  const onSubmit = (data: { quantity: string }) => {
+    const quantity = parseFloat(data.quantity);
+    const subtotal = quantity * item.price;
+    const activityToAdd: ActivityToAdd = {
+      ...item,
+      quantity,
+      subtotal,
+    };
+
+    addActivity({ ...budget, activities: [...budget.activities!, activityToAdd] });
+    setSubTotal(0);
+    navigate("/budgets/new");
+  };
 
   const onChangeQuantity = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
     const quantity = event.target.value as unknown as number;
     setSubTotal(quantity * item.price);
   };
@@ -44,7 +70,7 @@ const ActivityAddButton = ({ item }: any) => {
         <FormContainer onSuccess={onSubmit}>
           <DialogTitle sx={{ backgroundColor: PRIMARY.main }}>
             <Typography variant="h4" color={WHITE.main}>
-              Agregar nueva composicion{" "}
+              Agregar nueva composicion
             </Typography>
           </DialogTitle>
           <DialogContent>
@@ -83,7 +109,6 @@ const ActivityAddButton = ({ item }: any) => {
                     inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
                   />
                   <TextField
-                    id={item.price}
                     label="Precio Unitario"
                     defaultValue={item.price}
                     variant="outlined"

@@ -27,8 +27,6 @@ import Loader from "../common/Loader";
 const ActivityTable = () => {
   const { data } = useRecoilValue(compositionsQueryList);
 
-  if (data.length === 0) return null;
-
   return (
     <React.Suspense fallback={<Loader />}>
       <TableContainer component={Paper}>
@@ -95,7 +93,7 @@ const Row = (props: { row: any }) => {
                 </TableHead>
                 <TableBody>
                   {row.items.map((activityRow: any) => (
-                    <TableRow key={activityRow.id}>
+                    <TableRow key={activityRow.item_id}>
                       <TableCell component="th" scope="row">
                         {activityRow.name}
                       </TableCell>
