@@ -1,11 +1,16 @@
 import { Stack, Typography } from "@mui/material";
 
-import { createRef } from "react";
 import { Helmet } from "react-helmet-async";
+import { budgetCardText } from "../../texts/budget/content";
 import MainCard from "../common/cards/MainCard";
 import BudgetNewButton from "./BudgetNewButton";
 import BudgetTable from "./BudgetTable";
 
+/**
+ * Parent component to handle budget actions
+ * route is "/budgets/all"
+ * @returns
+ */
 const BudgetPage = () => {
   return (
     <>
@@ -14,17 +19,12 @@ const BudgetPage = () => {
       </Helmet>
       {/* @ts-ignore */}
       <MainCard title="Presupuestos">
-        <Typography variant="body2">
-          En esta seccion, podras ver tus presupuestos, crear nuevo presupuesto, exportar un presupuesto a Excel y
-          muchas cosas más.
-        </Typography>
+        <Typography variant="body2">{budgetCardText}</Typography>
       </MainCard>
-
       <br />
       <Stack spacing={2}>
         <BudgetTable />
       </Stack>
-
       <BudgetNewButton />
     </>
   );

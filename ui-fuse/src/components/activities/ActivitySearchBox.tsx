@@ -1,5 +1,5 @@
 import { styled, alpha } from "@mui/material/styles";
-import { Toolbar, IconButton, OutlinedInput, InputAdornment, Button } from "@mui/material";
+import { Toolbar, IconButton, OutlinedInput, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import ActivityFilterButton from "./ActivityFilterButton";

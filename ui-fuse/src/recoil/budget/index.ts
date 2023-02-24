@@ -1,6 +1,6 @@
 import atom from "./atom";
-import budgetSelector from "./selector";
+import { budgetSelector, budgetTotalSelector } from "./selector";
 
-export { budgetSelector };
+export { budgetSelector, budgetTotalSelector };
 
 export default atom;

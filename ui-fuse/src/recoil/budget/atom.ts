@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { ActivityToAdd } from "../../types/Composition.type";
 
 export type BudgetAtomProps = {
   id: string;
@@ -6,7 +7,7 @@ export type BudgetAtomProps = {
   description: string;
   total: number;
   date: string;
-  activities: Array<unknown>;
+  activities: Array<ActivityToAdd>;
 };
 
 const budgetAtom = atom<Partial<BudgetAtomProps>>({

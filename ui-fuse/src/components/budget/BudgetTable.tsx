@@ -12,8 +12,7 @@ import {
   Collapse,
   tableCellClasses,
   Grid,
-  Button,
-  SvgIcon,
+  Tooltip,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -24,7 +23,7 @@ import { fCurrency } from "../../utils/formatNumber";
 import { fDate } from "../../utils/formatTime";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { SECONDARY, WHITE } from "../../appBase/theme/palette";
+import { SECONDARY } from "../../appBase/theme/palette";
 
 type BudgetItem = {
   id: string;
@@ -43,7 +42,14 @@ type Activity = {
   subTotal: number;
 };
 
+/**
+ * component that renders a table with all the budgets a user has createad
+ * @returns
+ */
+
 const BudgetTable = () => {
+  // TODO: delete this, the list shall be retrieved calling api
+  // wrap component with Suspense, check types!
   const rows: Array<BudgetItem> = [
     {
       id: "1",
@@ -155,19 +161,28 @@ const BudgetItemActions = () => {
   return (
     <Grid container spacing={1}>
       <Grid item xs={4}>
-        <IconButton>
-          <EditIcon sx={{ color: SECONDARY.light }} />
-        </IconButton>
+        <Tooltip title="Editar">
+          <IconButton>
+            <EditIcon sx={{ color: SECONDARY.light }} />
+          </IconButton>
+        </Tooltip>
       </Grid>
       <Grid item xs={4}>
-        <IconButton>
-          <img src={process.env.PUBLIC_URL + "/assets/excel.svg"} />
-        </IconButton>
+        <Tooltip title="Generar excel">
+          <IconButton>
+            <img
+              alt={process.env.PUBLIC_URL + "/assets/excel.svg"}
+              src={process.env.PUBLIC_URL + "/assets/excel.svg"}
+            />
+          </IconButton>
+        </Tooltip>
       </Grid>
       <Grid item xs={4}>
-        <IconButton>
-          <DeleteIcon sx={{ color: SECONDARY.darker }} />
-        </IconButton>
+        <Tooltip title="Eliminar">
+          <IconButton>
+            <DeleteIcon sx={{ color: SECONDARY.darker }} />
+          </IconButton>
+        </Tooltip>
       </Grid>
     </Grid>
   );
